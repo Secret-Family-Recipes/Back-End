@@ -5,84 +5,92 @@ exports.up = function(knex) {
       /********************************************************
        *                       RECIPES                        *
        ********************************************************/
-      .createTable('recipes', r => {
-        r.increments();
-        r.string('title', 255).notNullable();
-        r.integer('created_by')
+      .createTable('recipes', recipes => {
+        recipes.increments();
+        recipes.string('title', 255).notNullable();
+        recipes
+          .integer('created_by')
           .unsigned()
           .notNullable()
           .references('id')
           .inTable('users');
-        r.integer('category_id')
+        recipes
+          .integer('category_id')
           .unsigned()
           .notNullable()
           .references('id')
           .inTable('categories');
-        r.string('source', 255).notNullable();
+        recipes.string('source', 255).notNullable();
       })
       /********************************************************
        *                        USERS                         *
        ********************************************************/
-      .createTable('users', u => {
-        u.increments();
-        u.string('family_name', 255).notNullable();
-        u.string('first_name', 255).notNullable();
-        u.string('last_name', 255).notNullable();
-        u.string('email', 255)
-          .unique()
-          .notNullable();
-
-        u.string('password', 255).notNullable();
+      .createTable('users', users => {
+        users.increments();
+        users.string('family_name', 255).notNullable();
+        users.string('first_name', 255).notNullable();
+        users.string('last_name', 255).notNullable();
+        users
+          .string('email', 255)
+          .notNullable()
+          .unique();
+        users.string('password', 255).notNullable();
       })
       /********************************************************
        *                      CATEGORIES                      *
        ********************************************************/
-      .createTable('categories', c => {
-        c.increments();
-        c.string('name', 255)
+      .createTable('categories', categories => {
+        categories.increments();
+        categories
+          .string('name', 255)
           .notNullable()
           .unique();
       })
       /********************************************************
        *                        STEPS                         *
        ********************************************************/
-      .createTable('steps', s => {
-        s.increments();
-        s.string('description', 255).notNullable();
-        s.integer('recipe_id')
+      .createTable('steps', steps => {
+        steps.increments();
+        steps
+          .integer('recipe_id')
           .unsigned()
           .notNullable()
           .references('id')
-          .inTable('recipes');
+          .inTable('recipes')
+          .unique();
+        steps.string('description', 255).notNullable();
       })
       /********************************************************
        *                     INGREDIENTS                      *
        ********************************************************/
-      .createTable('ingredients', i => {
-        i.increments();
-        i.integer('recipe_id')
+      .createTable('ingredients', ingredients => {
+        ingredients.increments();
+        ingredients
+          .integer('recipe_id')
           .unsigned()
           .notNullable()
-          .unique()
           .references('id')
-          .inTable('recipes');
-        i.string('name', 255)
+          .inTable('recipes')
+          .unique();
+        ingredients
+          .string('name', 255)
           .notNullable()
           .unique();
-        i.decimal('quantity').notNullable();
-        i.integer('measurements_id')
+        ingredients.decimal('quantity').notNullable();
+        ingredients
+          .integer('measurements_id')
           .unsigned()
           .notNullable()
           .references('id')
           .inTable('measurements');
-        i.string('preparation').nullable();
+        ingredients.string('preparation').nullable();
       })
       /********************************************************
        *                     MEASUREMENTS                     *
        ********************************************************/
-      .createTable('measurements', m => {
-        m.increments();
-        m.string('name', 255).notNullable();
+      .createTable('measurements', measurements => {
+        measurements.increments();
+        measurements.string('name', 255).notNullable();
       })
   );
 };
