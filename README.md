@@ -1,6 +1,88 @@
-# Back-End
+## Secret Family Recipes - API Documentation
+---
+#### Endpoint
+https://ls-secret-family-recipes.herokuapp.com
 
-Proposal
+#### ER Diagram
+https://dbdesigner.page.link/tx7R
+
+---
+## Routes
+
+
+#### Register
+| Method | Endpoint        | Description                                                                                                                                               |
+| ------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| POST   | `auth/register` | Registers a new user with the system. Returns a JWT if successful. </br>~</br>Requires `family_name`, `first_name`, `last_name`, `email`, and `password`. |
+
+</br>
+#### Login
+| Method | Endpoint     | Description                                                              |
+| ------ | ------------ | ------------------------------------------------------------------------ |
+| POST   | `auth/login` | Returns a JWT if successful. </br>~</br>Requires `email` and `password`. |
+
+</br>
+#### Users
+| Method | Endpoint     | Description                                                         |
+| ------ | ------------ | ------------------------------------------------------------------- |
+| GET    | `/users`     | Returns an array of objects representing all users in the database. |
+| GET    | `/users/:id` | Returns an object of the user specified by the user id.             |
+| DELETE | `/users/:id` | Deletes a user specified by the user id.                            |
+
+</br>
+#### Recipes
+
+| Method | Endpoint                | Description                                                                                                                                 |
+| ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/recipes`              | Returns an array of objects representing all recipes in the database                                                                        |
+| GET    | `/recipes/:category_id` | Returns an array of objects representing all recipes with the specified category id.                                                        |
+| GET    | `/recipes/:id`          | Returns a recipe specified by the recipe id.                                                                                                |
+| POST   | `/recipes`              | Adds a new recipe to database and returns the newly created recipe back. </br>~</br>Requires `title`, `created_by`, `category_id`, `author` |
+| PUT    | `/recipes/:id`          | Updates a recipe specified by the recipe id. </br>~</br>Requires `title`, `created_by`, `category_id`, `author`                             |
+| DELETE | `/recipes/:id`          | Deletes a recipe specified by the recipe id                                                                                                 |
+
+
+</br>
+#### Ingredients
+
+| Method | Endpoint                              | Description                                                                                                                                          |
+| ------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/recipes/:recipe_id/ingredients`     | Returns an array of objects representing all ingredients referenced by the recipe_id                                                                 |
+| POST   | `/recipes/:recipe_id/ingredients`     | Adds a new ingredient to the database.</br>~</br>Requires `recipe_id`, `name`, `quantity`, `measurement_id`, `preparation`                           |
+| PUT    | `/recipes/:recipe_id/ingredients/:id` | Updates an ingredient specified by the recipe and ingredient id.</br>~</br>Requires `recipe_id`, `name`, `quantity`, `measurement_id`, `preparation` |
+| DELETE | `/recipes/:recipe_id/ingredients/:id` | Deletes an ingredient specified by the recipe id                                                                                                     |
+
+</br>
+#### Steps
+
+| Method | Endpoint                        | Description                                                                                       |
+| ------ | ------------------------------- | ------------------------------------------------------------------------------------------------- |
+| GET    | `/recipes/:recipe_id/steps      | Returns an array of objects representing all steps referenced by the recipe id                    |
+| POST   | `/recipes/:recipe_id/steps`     | Adds a new step to the recipe.</br>~</br>Requires `recipe_id`, `description`                      |
+| PUT    | `/recipes/:recipe_id/steps/:id` | Updates a step specified by the recipe and step id.</br>~</br>Requires `recipe_id`, `description` |
+| DELETE | `/recipes/recipe_id/steps/:id`  | Deletes a step specified by the recipe and step id.                                               |
+
+</br>
+#### Measurements
+| Method | Endpoint            | Description                                                                        |
+| ------ | ------------------- | ---------------------------------------------------------------------------------- |
+| GET    | `/measurements`     | Returns an array of objects representing all measurment types                      |
+| POST   | `/measurements`     | Adds a new measurement to the database.</br>~</br> Requires `name`.                |
+| PUT    | `/measurements/:id` | Updates a measurement specified by the measurement id.</br>~</br> Requires `name`. |
+| DELETE | `/measurements/:id` | Deletes a measurement specified by the measurement id.                             |
+
+</br>
+#### Categories
+| Method | Endpoint          | Description                                                                 |
+| ------ | ----------------- | --------------------------------------------------------------------------- |
+| GET    | `/categories`     | Returns an array of objects representing all categories.                    |
+| POST   | `/categories`     | Adds a new category to the database.</br>~</br>Requires `name`.             |
+| PUT    | `/categories/:id` | Updates a category specified by the category id.</br>~</br>Requires `name`. |
+| DELETE | `/categories/:id` | Deletes a category specified by the category id.                            |
+
+---
+
+##Proposal
 
 - What problem does your app solve?
 
@@ -14,24 +96,24 @@ Proposal
 
 	Family history is invaluable. Paper crumbles and is one coffee spill away from being gone forever. Don’t take the risk! Secret Family Recipes Cookbook stores your family recipe secrets as long as the internet exists, so basically forever. 
 	
-Features
+#### Features
 
 - What features are required for your minimum viable product?
 
 1. A user should be able to register their username and password
-1. A user should be able to login into a private account
-1. A user should be able to logout of their account
-1. A user should be sent to their personal homepage that lists all recipes when they log into their account
-1. A user should be able to search for recipes by title
-1. A user should be able to search for recipes by category (tag)
-1. A user should be able to enter a new recipe with the following fields:
+2. A user should be able to login into a private account
+3. A user should be able to logout of their account
+4. A user should be sent to their personal homepage that lists all recipes when they log into their account
+5. A user should be able to search for recipes by title
+6. A user should be able to search for recipes by category (tag)
+7. A user should be able to enter a new recipe with the following fields:
     - Title
     - Source
     - Ingredients
     - Instructions
     - Category
-1. A user should be able to edit an existing recipe
-1. A user should be able to delete an existing recipe
+8. A user should be able to edit an existing recipe
+9. A user should be able to delete an existing recipe
 
 - What features may you wish to put in a future release?
 
@@ -71,7 +153,7 @@ For Data Scientists
 - Write a description for what the DS problem is (what uncertainty/prediction are we trying to do here? Sentiment analysis? Why is this a useful solution to a problem?)
 - A target (e.g. JSON format or such) for output that DS students can deliver to web/other students for them to ingest and use in the app
 
-Target Audience
+#### Target Audience
 
 - Who is your target audience? Be specific.
 
@@ -87,11 +169,12 @@ https://docs.google.com/forms/d/e/1FAIpQLSfHATVt2RAL7t3emlkqy40p-X8pGlDtoCSO4ZQw
 
 Form surveys were collected from 5 individuals ranging in age, sex, and location. From the research collected, we decided to move forward with creating a better, more intuitive cookbook app.
 
-Research
+#### Research
 
 - Research thoroughly before writing a single line of code. Solidify the features of your app conceptually before implementation. Spend the weekend researching so you can hit the ground running on Monday.
 Prototype Key Feature(s)
 
 - This is the “bread and butter” of the app, this is what makes your app yours. Calculate how long it takes to implement these features and triple the time estimated. That way you’ll have plenty of time to finish. It is preferred to drop features and spend more time working on your MVP features if needed.
+
 
 
