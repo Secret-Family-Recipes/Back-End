@@ -89,7 +89,7 @@ https://dbdesigner.page.link/tx7R
 
 ---
 
-##Proposal
+## Proposal
 
 - What problem does your app solve?
 
