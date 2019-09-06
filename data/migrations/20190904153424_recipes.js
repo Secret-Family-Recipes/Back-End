@@ -20,16 +20,15 @@ exports.up = function(knex) {
           .notNullable()
           .references('id')
           .inTable('categories');
-        recipes.string('source', 255).notNullable();
       })
       /********************************************************
        *                        USERS                         *
        ********************************************************/
       .createTable('users', users => {
         users.increments();
-        users.string('family_name', 255).notNullable();
         users.string('first_name', 255).notNullable();
         users.string('last_name', 255).notNullable();
+        users.string('family_name', 255).notNullable();
         users
           .string('email', 255)
           .notNullable()
@@ -47,7 +46,57 @@ exports.up = function(knex) {
           .unique();
       })
       /********************************************************
-       *                        STEPS                         *
+       *                   RECIPES_CATEGORIES                 *
+       ********************************************************/
+      .createTable('recipes_categories', rec_cat => {
+        rec_cat.increments();
+        rec_cat
+          .integer('recipe_id')
+          .unsigned()
+          .unique()
+          .notNullable()
+          .references('id')
+          .inTable('recipes');
+        rec_cat
+          .integer('category_id')
+          .unsigned()
+          .unique()
+          .notNullable()
+          .references('id')
+          .inTable('categories');
+      })
+      /********************************************************
+       *                        AUTHORS                       *
+       ********************************************************/
+      .createTable('authors', authors => {
+        authors.increments();
+        authors
+          .string('name', 255)
+          .notNullable()
+          .unique();
+      })
+      /********************************************************
+       *                     RECIPES_AUTHORS                  *
+       ********************************************************/
+      .createTable('recipes_authors', rec_athrs => {
+        rec_athrs.increments();
+        rec_athrs
+          .integer('recipe_id')
+          .unsigned()
+          .unique()
+          .notNullable()
+          .references('id')
+          .inTable('recipes');
+        rec_athrs
+          .integer('author_id')
+          .unsigned()
+          .unique()
+          .notNullable()
+          .references('id')
+          .inTable('authors');
+      })
+      /********************************************************
+       *                          STEPS                       *
        ********************************************************/
       .createTable('steps', steps => {
         steps.increments();
@@ -61,7 +110,7 @@ exports.up = function(knex) {
         steps.string('description', 255).notNullable();
       })
       /********************************************************
-       *                     INGREDIENTS                      *
+       *                       INGREDIENTS                    *
        ********************************************************/
       .createTable('ingredients', ingredients => {
         ingredients.increments();
@@ -100,7 +149,10 @@ exports.down = function(knex) {
     .dropTableIfExists('measurements')
     .dropTableIfExists('ingredients')
     .dropTableIfExists('steps')
-    .dropTableIfExists('categories')
     .dropTableIfExists('users')
+    .dropTableIfExists('categories')
+    .dropTableIfExists('recipes_categories')
+    .dropTableIfExists('authors')
+    .dropTableIfExists('recipes_authors')
     .dropTableIfExists('recipes');
 };
