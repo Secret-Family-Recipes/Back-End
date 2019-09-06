@@ -23,8 +23,8 @@ server.use(cors());
 const authRouter = require('../routes/auth/auth-router');
 const recipesRouter = require('../routes/recipes/recipes-router');
 
-server.use('/api/auth', authRouter);
-server.use('/api/recipes', authorize, recipesRouter);
+server.use('/auth', authRouter);
+server.use('/recipes', authorize, recipesRouter);
 
 /********************************************************
  *                   CUSTOM MIDDLEWARE                  *
