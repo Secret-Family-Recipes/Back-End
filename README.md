@@ -25,25 +25,24 @@ https://dbdesigner.page.link/tx7R
 </br>
 
 #### Users
-| Method | Endpoint     | Description                                                                                                                     |
-| ------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/users`     | Returns an array of objects representing all users in the database.                                                             |
-| GET    | `/users/:id` | Returns an object of the user specified by the user id.                                                                         |
-| PUT    | `/users/:id` | Updates a user specified by the user id. </br>~</br>Requires `family_name`, `first_name`, `last_name`, `email`, and `password`. |
-| DELETE | `/users/:id` | Deletes a user specified by the user id.                                                                                        |
+| Method | Endpoint             | Description                                                                                                                     |
+| ------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/users`             | Returns an array of objects representing all users in the database.                                                             |
+| GET    | `/users/:id`         | Returns an object of the user specified by the user id.                                                                         |
+| GET    | `/users/:id/recipes` | Returns an array of objects representing recipes associated with the user id                                                    |
+| PUT    | `/users/:id`         | Updates a user specified by the user id. </br>~</br>Requires `family_name`, `first_name`, `last_name`, `email`, and `password`. |
+| DELETE | `/users/:id`         | Deletes a user specified by the user id.                                                                                        |
 
 </br>
 
 #### Recipes
 
-| Method | Endpoint                | Description                                                                                                                                      |
-| ------ | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| GET    | `/recipes`              | Returns an array of objects representing all recipes in the database                                                                             |
-| GET    | `/recipes/:id`          | Returns a recipe specified by the recipe id.                                                                                                     |
-| GET    | `/recipes/:category_id` | Returns an array of objects representing all recipes with the specified category id.                                                             |  |
-| POST   | `/recipes`              | Adds a new recipe to database and returns the newly created recipe back. </br>~</br>Requires from `title`, `created_by`, `category_id`, `author` |
-| PUT    | `/recipes/:id`          | Updates a recipe specified by the recipe id. </br>~</br>Requires `title`, `created_by`, `category_id`, `author`                                  |
-| DELETE | `/recipes/:id`          | Deletes a recipe specified by the recipe id                                                                                                      |
+| Method | Endpoint       | Description                                                                                                                        |
+| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/recipes/:id` | Returns a recipe specified by the recipe id.                                                                                       |
+| POST   | `/recipes`     | Adds a new recipe to database and returns the newly created recipe back. </br>~</br>Requires from `title`, `created_by`, `author`. |
+| PUT    | `/recipes/:id` | Updates a recipe specified by the recipe id. </br>~</br>Requires `title`, `created_by`, `author`.                                  |
+| DELETE | `/recipes/:id` | Deletes a recipe specified by the recipe id                                                                                        |
 
 </br>
 
@@ -87,6 +86,14 @@ https://dbdesigner.page.link/tx7R
 | PUT    | `/categories/:id` | Updates a category specified by the category id.</br>~</br>Requires `name`. |
 | DELETE | `/categories/:id` | Deletes a category specified by the category id.                            |
 
+#### Authors
+| Method | Endpoint              | Description                                                                      |
+| ------ | --------------------- | -------------------------------------------------------------------------------- |
+| GET    | `/authors`            | Returns an array of objects representing all authors in the database.            |
+| GET    | `/authors/:recipe_id` | Returns an array of objects representing all recipes specified by a category id. |
+| POST   | `/categories`         | Adds a new category to the database.</br>~</br>Requires `name`.                  |
+| PUT    | `/categories/:id`     | Updates a category specified by the category id.</br>~</br>Requires `name`.      |
+| DELETE | `/categories/:id`     | Deletes a category specified by the category id.                                 |
 ---
 
 ## Proposal
