@@ -20,6 +20,7 @@ exports.up = function(knex) {
           .notNullable()
           .references('id')
           .inTable('categories');
+        recipes.string('author', 255).notNullable();
       })
       /********************************************************
        *                        USERS                         *
@@ -64,36 +65,6 @@ exports.up = function(knex) {
           .notNullable()
           .references('id')
           .inTable('categories');
-      })
-      /********************************************************
-       *                        AUTHORS                       *
-       ********************************************************/
-      .createTable('authors', authors => {
-        authors.increments();
-        authors
-          .string('name', 255)
-          .notNullable()
-          .unique();
-      })
-      /********************************************************
-       *                     RECIPES_AUTHORS                  *
-       ********************************************************/
-      .createTable('recipes_authors', rec_athrs => {
-        rec_athrs.increments();
-        rec_athrs
-          .integer('recipe_id')
-          .unsigned()
-          .unique()
-          .notNullable()
-          .references('id')
-          .inTable('recipes');
-        rec_athrs
-          .integer('author_id')
-          .unsigned()
-          .unique()
-          .notNullable()
-          .references('id')
-          .inTable('authors');
       })
       /********************************************************
        *                          STEPS                       *
@@ -152,7 +123,5 @@ exports.down = function(knex) {
     .dropTableIfExists('users')
     .dropTableIfExists('categories')
     .dropTableIfExists('recipes_categories')
-    .dropTableIfExists('authors')
-    .dropTableIfExists('recipes_authors')
     .dropTableIfExists('recipes');
 };
