@@ -32,13 +32,14 @@ https://dbdesigner.page.link/tx7R
 
 #### Users
 
-| Method | Endpoint             | Description                                                                                                                     |
-| ------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/users`             | Returns an array of objects representing all users in the database.                                                             |
-| GET    | `/users/:id`         | Returns an object of the user specified by the user id.                                                                         |
-| GET    | `/users/:id/recipes` | Returns an array of objects representing recipes associated with the user id                                                    |
-| PUT    | `/users/:id`         | Updates a user specified by the user id. </br>~</br>Requires `family_name`, `first_name`, `last_name`, `email`, and `password`. |
-| DELETE | `/users/:id`         | Deletes a user specified by the user id.                                                                                        |
+| Method | Endpoint                     | Description                                                                                                     |
+| ------ | ---------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| GET    | `/users`                     | Returns an array of objects representing all users in the database.                                             |
+| GET    | `/users/:id`                 | Returns an object of the user specified by the user id.                                                         |
+| GET    | `/users/:id/recipes`         | Returns an array of objects representing recipes associated with the user id                                    |
+| PUT    | `/users/:id`                 | Updates a user specified by the user id. </br>~</br>Requires `family_name`, `first_name`, `last_name`, `email`. |
+| PUT    | `/users/:id/update-password` | Updates the password of a user specified by the user id. </br>~</br>Requires `password`.                        |
+| DELETE | `/users/:id`                 | Deletes a user specified by the user id.                                                                        |
 
 </br>
 
