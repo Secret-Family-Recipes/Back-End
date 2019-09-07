@@ -1,16 +1,21 @@
 ## Secret Family Recipes - API Documentation
+
 ---
+
 #### Endpoint
+
 https://ls-secret-family-recipes.herokuapp.com
 
 #### ER Diagram
+
 https://dbdesigner.page.link/tx7R
 
 ---
+
 ## Routes
 
-
 #### Register
+
 | Method | Endpoint        | Description                                                                                                                                               |
 | ------ | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | POST   | `auth/register` | Registers a new user with the system. Returns a JWT if successful. </br>~</br>Requires `family_name`, `first_name`, `last_name`, `email`, and `password`. |
@@ -18,6 +23,7 @@ https://dbdesigner.page.link/tx7R
 </br>
 
 #### Login
+
 | Method | Endpoint     | Description                                                              |
 | ------ | ------------ | ------------------------------------------------------------------------ |
 | POST   | `auth/login` | Returns a JWT if successful. </br>~</br>Requires `email` and `password`. |
@@ -25,6 +31,7 @@ https://dbdesigner.page.link/tx7R
 </br>
 
 #### Users
+
 | Method | Endpoint             | Description                                                                                                                     |
 | ------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | GET    | `/users`             | Returns an array of objects representing all users in the database.                                                             |
@@ -47,7 +54,9 @@ https://dbdesigner.page.link/tx7R
 </br>
 
 #### Ingredients
-****
+
+---
+
 | Method | Endpoint                              | Description                                                                                                                                          |
 | ------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | GET    | `/recipes/:recipe_id/ingredients`     | Returns an array of objects representing all ingredients referenced by the recipe_id                                                                 |
@@ -69,6 +78,7 @@ https://dbdesigner.page.link/tx7R
 </br>
 
 #### Measurements
+
 | Method | Endpoint            | Description                                                                        |
 | ------ | ------------------- | ---------------------------------------------------------------------------------- |
 | GET    | `/measurements`     | Returns an array of objects representing all measurment types                      |
@@ -79,6 +89,7 @@ https://dbdesigner.page.link/tx7R
 </br>
 
 #### Categories
+
 | Method | Endpoint          | Description                                                                 |
 | ------ | ----------------- | --------------------------------------------------------------------------- |
 | GET    | `/categories`     | Returns an array of objects representing all categories.                    |
@@ -86,30 +97,20 @@ https://dbdesigner.page.link/tx7R
 | PUT    | `/categories/:id` | Updates a category specified by the category id.</br>~</br>Requires `name`. |
 | DELETE | `/categories/:id` | Deletes a category specified by the category id.                            |
 
-#### Authors
-| Method | Endpoint              | Description                                                                      |
-| ------ | --------------------- | -------------------------------------------------------------------------------- |
-| GET    | `/authors`            | Returns an array of objects representing all authors in the database.            |
-| GET    | `/authors/:recipe_id` | Returns an array of objects representing all recipes specified by a category id. |
-| POST   | `/categories`         | Adds a new category to the database.</br>~</br>Requires `name`.                  |
-| PUT    | `/categories/:id`     | Updates a category specified by the category id.</br>~</br>Requires `name`.      |
-| DELETE | `/categories/:id`     | Deletes a category specified by the category id.                                 |
----
-
 ## Proposal
 
 - What problem does your app solve?
 
-	Creates a place to store treasured family recipes that’s secure and only viewable to the owner of the recipes. Recipes once written down in books and paper can be preserved over time without fear of them being lost or degraded.
+  Creates a place to store treasured family recipes that’s secure and only viewable to the owner of the recipes. Recipes once written down in books and paper can be preserved over time without fear of them being lost or degraded.
 
 - Be as specific as possible; how does your app solve the problem?
 
-	Our app allows family members from young to old the ability to record and access recipes from anywhere via mobile or desktop online connection. Our app essentially converts treasured paper documents to digital files that will virtually last forever.
+  Our app allows family members from young to old the ability to record and access recipes from anywhere via mobile or desktop online connection. Our app essentially converts treasured paper documents to digital files that will virtually last forever.
 
 - What is the mission statement?
 
-	Family history is invaluable. Paper crumbles and is one coffee spill away from being gone forever. Don’t take the risk! Secret Family Recipes Cookbook stores your family recipe secrets as long as the internet exists, so basically forever. 
-	
+  Family history is invaluable. Paper crumbles and is one coffee spill away from being gone forever. Don’t take the risk! Secret Family Recipes Cookbook stores your family recipe secrets as long as the internet exists, so basically forever.
+
 #### Features
 
 - What features are required for your minimum viable product?
@@ -121,11 +122,11 @@ https://dbdesigner.page.link/tx7R
 5. A user should be able to search for recipes by title
 6. A user should be able to search for recipes by category (tag)
 7. A user should be able to enter a new recipe with the following fields:
-    - Title
-    - Source
-    - Ingredients
-    - Instructions
-    - Category
+   - Title
+   - Source
+   - Ingredients
+   - Instructions
+   - Category
 8. A user should be able to edit an existing recipe
 9. A user should be able to delete an existing recipe
 
@@ -146,8 +147,6 @@ https://www.bigoven.com
 
 With BigOven, you can take your recipes anywhere, make grocery lists and easily share your favorite creations with your friends, family or even your future self when you need them. Our Kitchen Cloud platform enables new recipe, shopping and nutrition applications with our API, connecting home cooks with the foods they love, allowing developers, bloggers and webmasters to add recipes and shopping lists to their apps.
 
-
-
 https://www.mycookbook-online.net/en/home/
 
 My Cookbook offers some of the same features as BigOven, but it’s free in limited quantities. Choose to add a recipe manually or import one from the internet. Like BigOven, My Cookbook connects to your browser, allowing you to transfer recipes from a web page to the app.
@@ -159,23 +158,22 @@ Frameworks - Libraries
 - Do APIs require you to contact its maintainer to gain access?
 - Are you required to pay to use the API?
 - Have you considered using Apple Frameworks? (MapKit, Healthkit, ARKit?)
-For Data Scientists
+  For Data Scientists
 
-
-- Describe the Established data source with at least rough data able to be provided on day 1. 
-- You can gather information about the data set you’ll be working with from the project description. Be sure to collaborate with your PM, and your Backend Architect to chat about the resources you have.
-- Write a description for what the DS problem is (what uncertainty/prediction are we trying to do here? Sentiment analysis? Why is this a useful solution to a problem?)
-- A target (e.g. JSON format or such) for output that DS students can deliver to web/other students for them to ingest and use in the app
+* Describe the Established data source with at least rough data able to be provided on day 1.
+* You can gather information about the data set you’ll be working with from the project description. Be sure to collaborate with your PM, and your Backend Architect to chat about the resources you have.
+* Write a description for what the DS problem is (what uncertainty/prediction are we trying to do here? Sentiment analysis? Why is this a useful solution to a problem?)
+* A target (e.g. JSON format or such) for output that DS students can deliver to web/other students for them to ingest and use in the app
 
 #### Target Audience
 
 - Who is your target audience? Be specific.
 
-Our target audience is anyone with internet access as we aim to make the experience as accessible and user friendly as possible. If an age range must be defined, then our audience will range from adolescent to late adulthood. 
+Our target audience is anyone with internet access as we aim to make the experience as accessible and user friendly as possible. If an age range must be defined, then our audience will range from adolescent to late adulthood.
 
 - What feedback have you gotten from potential users?
 
-Our users would like to the most intuitive experience as possible. Many recipes sites/apps currently exist, but the biggest issue we’ve discovered is that many of them are overly complicated to use. We aim for our users to be able to login, store, and retrieve a recipe as quickly as possible. 
+Our users would like to the most intuitive experience as possible. Many recipes sites/apps currently exist, but the biggest issue we’ve discovered is that many of them are overly complicated to use. We aim for our users to be able to login, store, and retrieve a recipe as quickly as possible.
 
 - Have you validated the problem and your solution with your target audience? How?
 
@@ -186,9 +184,6 @@ Form surveys were collected from 5 individuals ranging in age, sex, and location
 #### Research
 
 - Research thoroughly before writing a single line of code. Solidify the features of your app conceptually before implementation. Spend the weekend researching so you can hit the ground running on Monday.
-Prototype Key Feature(s)
+  Prototype Key Feature(s)
 
 - This is the “bread and butter” of the app, this is what makes your app yours. Calculate how long it takes to implement these features and triple the time estimated. That way you’ll have plenty of time to finish. It is preferred to drop features and spend more time working on your MVP features if needed.
-
-
-
