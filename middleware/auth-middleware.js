@@ -4,11 +4,12 @@ module.exports = (req, res, next) => {
   const tokenHeader = req.headers.authorization;
   if (tokenHeader) {
     const [bearer, token] = tokenHeader.split(' ');
-
+    console.log(bearer);
+    console.log(token);
     if (bearer.toUpperCase() === 'BEARER' && token) {
       jwt.verify(
         token,
-        process.env.LOGIN_SECRET || 'sooperdoopersecret',
+        process.env.TOKEN_SECRET || 'sooperdoopersecret',
         (err, decodedToken) => {
           if (err) {
             res
