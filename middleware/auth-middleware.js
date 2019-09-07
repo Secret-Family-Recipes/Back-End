@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     if (bearer.toUpperCase() === 'BEARER' && token) {
       jwt.verify(
         token,
-        process.env.LOGIN_SECRET || 'sooperdoopersecret',
+        process.env.TOKEN_SECRET || 'sooperdoopersecret',
         (err, decodedToken) => {
           if (err) {
             res
