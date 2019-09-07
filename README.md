@@ -101,11 +101,11 @@ https://dbdesigner.page.link/tx7R
 
 - What problem does your app solve?
 
-      	Creates a place to store treasured family recipes that’s secure and only viewable to the owner of the recipes. Recipes once written down in books and paper can be preserved over time without fear of them being lost or degraded.
+  Creates a place to store treasured family recipes that’s secure and only viewable to the owner of the recipes. Recipes once written down in books and paper can be preserved over time without fear of them being lost or degraded.
 
 - Be as specific as possible; how does your app solve the problem?
 
-      	Our app allows family members from young to old the ability to record and access recipes from anywhere via mobile or desktop online connection. Our app essentially converts treasured paper documents to digital files that will virtually last forever.
+  Our app allows family members from young to old the ability to record and access recipes from anywhere via mobile or desktop online connection. Our app essentially converts treasured paper documents to digital files that will virtually last forever.
 
 - What is the mission statement?
 
