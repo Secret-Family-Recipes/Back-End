@@ -21,10 +21,12 @@ server.use(cors());
  *                        ROUTES                        *
  ********************************************************/
 const authRouter = require('../routes/auth/auth-router');
+const usersRouter = require('../routes/users/users-router');
 const recipesRouter = require('../routes/recipes/recipes-router');
 
 server.use('/auth', authRouter);
 server.use('/recipes', authorize, recipesRouter);
+server.use('/users', authorize, usersRouter);
 
 /********************************************************
  *                   CUSTOM MIDDLEWARE                  *
