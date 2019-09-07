@@ -97,8 +97,6 @@ https://dbdesigner.page.link/tx7R
 | PUT    | `/categories/:id` | Updates a category specified by the category id.</br>~</br>Requires `name`. |
 | DELETE | `/categories/:id` | Deletes a category specified by the category id.                            |
 
----
-
 ## Proposal
 
 - What problem does your app solve?
