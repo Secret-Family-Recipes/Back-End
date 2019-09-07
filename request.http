@@ -1,0 +1,88 @@
+@hostname = localhost
+@port = 5000
+@host = {{hostname}}:{{port}}
+@register = auth/register
+@login = auth/login
+
+@contentType = application/json
+
+###
+POST http://{{host}}/{{register}} HTTP/1.1
+Content-Type: {{contentType}}
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoidXNlciIsInVzZXJJRCI6MTYsImlhdCI6MTU2Nzg5MTE4MywiZXhwIjoxNTY3ODk4MzgzfQ.BJ62XjvJWTG9-Gn5dA7iFsYCLGNA8Grspl5J_uZJ3tU
+
+{
+  "family_name": "Boose",
+  "first_name": "Jamelle",
+  "last_name": "Boosse",
+  "email": "jboose2@gmail.com",
+  "password": "catdog123"
+}
+
+###
+GET http://{{host}}/recipes/ HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
+POST http://{{host}}/{{login}} HTTP/1.1
+Content-Type: {{contentType}}
+# Authorization: bearer {{token}}
+
+{
+  "email": "jboose2@gmail.com",
+  "password": "catdog123"
+}
+
+###
+GET http://{{host}}/users HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+POST http://{{host}}/recipes HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "title": "oatmeal",
+  "created_by": 16,
+  "author": "grandma",
+  "name": "pasta"
+}
+
+###
+
+GET http://{{host}}/categories HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
+POST http://{{host}}/categories HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "cereal"
+}
+
+###
+@id = 1
+
+PUT http://{{host}}/categories/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "pastas"
+}
+
+###
+@id = 2
+
+DELETE  http://{{host}}/categories/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
