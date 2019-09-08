@@ -1,10 +1,10 @@
 const router = require("express").Router(),
-  Recipes = require("./recipes-model");
+  Recipes = require("./recipes-model"),
+  Ingredients = require("../ingredients/ingredients-model");
 
 /********************************************************
  *                     GET /recipes                     *
  ********************************************************/
-// TODO test endpoint, delete when completed
 router.get("/", async (req, res, next) => {
   // TEST ENDPOINT
   try {
@@ -71,7 +71,6 @@ router.put("/:id", validateID, async (req, res) => {
  ********************************************************/
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  const { body } = req.body;
 
   try {
     const deleted = await Recipes.remove(id);
@@ -83,6 +82,46 @@ router.delete("/:id", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json({ message: "Failed to delete recipe" });
+  }
+});
+
+router.get("/:id", validateID, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const recipe = await Recipes.findById(id);
+    res.json(recipe);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get recipe." });
+  }
+});
+
+/********************************************************
+ *        GET /recipes/:recipe_id/ingredients           *
+ ********************************************************/
+router.get("/:recipe_id/ingredients", async (req, res) => {
+  const { recipe_id } = req.params;
+  try {
+    const ingredients = await Ingredients.getIngredients(recipe_id);
+    res.status(200).json(ingredients);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+});
+
+/********************************************************
+ *        POST /recipes/:recipe_id/ingredients          *
+ ********************************************************/
+router.post("/:recipe_id/ingredients", async (req, res) => {
+  const body = req.body;
+  const recipe_id = req.params.recipe_id;
+  const id = { recipe_id: recipe_id };
+  const ingredientData = Object.assign(body, id);
+
+  try {
+    const ingredient = await Ingredients.addIngredients(ingredientData);
+    res.status(200).json(ingredient);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to create new ingredients" });
   }
 });
 

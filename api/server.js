@@ -25,12 +25,14 @@ const usersRouter = require("../routes/users/users-router");
 const recipesRouter = require("../routes/recipes/recipes-router");
 const categoriesRouter = require("../routes/categories/categories-router");
 const measurementsRouter = require("../routes/measurements/measurements-router");
+const ingredientsRouter = require("../routes/ingredients/ingredients-router");
 
 server.use("/auth", authRouter);
 server.use("/recipes", authorize, recipesRouter);
 server.use("/users", authorize, usersRouter);
 server.use("/categories", authorize, categoriesRouter);
 server.use("/measurements", authorize, measurementsRouter);
+server.use("/ingredients", authorize, ingredientsRouter);
 
 /********************************************************
  *                   CUSTOM MIDDLEWARE                  *
