@@ -12,8 +12,12 @@ function find() {
   return db("categories");
 }
 
-function add(category) {
-  return db("categories").insert(category);
+async function add(category) {
+  return db("categories")
+    .insert(category)
+    .then(async ([id]) => {
+      return await findById(id);
+    });
 }
 
 function findById(id) {

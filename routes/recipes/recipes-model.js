@@ -2,9 +2,10 @@ const db = require("../../data/db-config");
 
 module.exports = {
   find,
-  findById
-  // findByCategory,
-  // add
+  findById,
+  add,
+  update,
+  remove
 };
 
 function find() {
@@ -17,30 +18,22 @@ function findById(id) {
     .first();
 }
 
-// TODO add
-// async function add(recipe) {
-//   const name = recipe.name;
-//   console.log(name);
-//   try {
-//     const category = await findByCategory(name);
-//     if (Object.keys(category).length === 0) {
-//       await db("categories").insert(category);
-//       return db("recipes").insert(recipe);
-//     } else {
-//       return db("recipes").insert(recipe);
-//     }
-//   } catch (error) {
-//     return error;
-//   }
-// }
+async function add(recipe) {
+  return db("recipes")
+    .insert(recipe)
+    .then(async ([id]) => {
+      return await findById(id);
+    });
+}
 
-// TODO findByCategory
-// function findByCategory(name) {
-//   return db("categories")
-//     .where({ name })
-//     .first();
-// }
+async function update(changes, id) {
+  return db("recipes")
+    .where({ id })
+    .update(changes);
+}
 
-// async function findByCategory(name) {
-//   const category = await
-// }
+function remove(id) {
+  return db("recipes")
+    .where({ id })
+    .del();
+}
