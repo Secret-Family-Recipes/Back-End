@@ -55,6 +55,48 @@ router.post('/login', validateRequest, async (req, res) => {
   }
 });
 
+/********************************************************
+ *                 POST auth/check-token                *
+ ********************************************************/
+router.post('/check-token', (req, res) => {
+  const tokenHeader = req.headers.authorization;
+
+  if (tokenHeader) {
+    const [bearer, token] = tokenHeader.split(' ');
+
+    if (bearer.toUpperCase() === 'BEARER' && token) {
+      jwt.verify(
+        token,
+        process.env.TOKEN_SECRET || 'sooperdoopersecret',
+        err => {
+          if (err) {
+            res.json({
+              message: 'error verifying token',
+              error: err.message,
+              tokenVerified: false
+            });
+          } else {
+            res.status(200).json({
+              message: 'token verified',
+              tokenVerified: true
+            });
+          }
+        }
+      );
+    } else {
+      res.status(401).json({
+        message: 'invalid scheme, or no token after scheme name.',
+        tokenVerified: false
+      });
+    }
+  } else {
+    res.status(401).json({
+      message: 'missing authorization header',
+      tokenVerified: false
+    });
+  }
+});
+
 function generateToken(user) {
   const payload = {
     subject: 'user',
