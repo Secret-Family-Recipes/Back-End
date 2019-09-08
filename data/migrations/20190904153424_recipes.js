@@ -5,123 +5,123 @@ exports.up = function(knex) {
       /********************************************************
        *                       RECIPES                        *
        ********************************************************/
-      .createTable('recipes', recipes => {
+      .createTable("recipes", recipes => {
         recipes.increments();
-        recipes.string('title', 255).notNullable();
+        recipes.string("title", 255).notNullable();
         recipes
-          .integer('created_by')
+          .integer("created_by")
           .unsigned()
           .notNullable()
-          .references('id')
-          .inTable('users');
+          .references("id")
+          .inTable("users");
         recipes
-          .integer('category_id')
+          .integer("category_id")
           .unsigned()
           .notNullable()
-          .references('id')
-          .inTable('categories');
-        recipes.string('author', 255).notNullable();
+          .references("id")
+          .inTable("categories");
+        recipes.string("author", 255).notNullable();
       })
       /********************************************************
        *                        USERS                         *
        ********************************************************/
-      .createTable('users', users => {
+      .createTable("users", users => {
         users.increments();
-        users.string('first_name', 255).notNullable();
-        users.string('last_name', 255).notNullable();
-        users.string('family_name', 255).notNullable();
+        users.string("first_name", 255).notNullable();
+        users.string("last_name", 255).notNullable();
+        users.string("family_name", 255).notNullable();
         users
-          .string('email', 255)
+          .string("email", 255)
           .notNullable()
           .unique();
-        users.string('password', 255).notNullable();
+        users.string("password", 255).notNullable();
       })
       /********************************************************
        *                      CATEGORIES                      *
        ********************************************************/
-      .createTable('categories', categories => {
+      .createTable("categories", categories => {
         categories.increments();
         categories
-          .string('name', 255)
+          .string("name", 255)
           .notNullable()
           .unique();
       })
       /********************************************************
        *                   RECIPES_CATEGORIES                 *
        ********************************************************/
-      .createTable('recipes_categories', rec_cat => {
+      .createTable("recipes_categories", rec_cat => {
         rec_cat.increments();
         rec_cat
-          .integer('recipe_id')
+          .integer("recipe_id")
           .unsigned()
           .unique()
           .notNullable()
-          .references('id')
-          .inTable('recipes');
+          .references("id")
+          .inTable("recipes");
         rec_cat
-          .integer('category_id')
+          .integer("category_id")
           .unsigned()
           .unique()
           .notNullable()
-          .references('id')
-          .inTable('categories');
+          .references("id")
+          .inTable("categories");
       })
       /********************************************************
        *                          STEPS                       *
        ********************************************************/
-      .createTable('steps', steps => {
+      .createTable("steps", steps => {
         steps.increments();
         steps
-          .integer('recipe_id')
+          .integer("recipe_id")
           .unsigned()
           .notNullable()
-          .references('id')
-          .inTable('recipes')
+          .references("id")
+          .inTable("recipes")
           .unique();
-        steps.string('description', 255).notNullable();
+        steps.string("description", 255).notNullable();
       })
       /********************************************************
        *                       INGREDIENTS                    *
        ********************************************************/
-      .createTable('ingredients', ingredients => {
+      .createTable("ingredients", ingredients => {
         ingredients.increments();
         ingredients
-          .integer('recipe_id')
+          .integer("recipe_id")
           .unsigned()
           .notNullable()
-          .references('id')
-          .inTable('recipes')
+          .references("id")
+          .inTable("recipes")
           .unique();
         ingredients
-          .string('name', 255)
+          .string("name", 255)
           .notNullable()
           .unique();
-        ingredients.decimal('quantity').notNullable();
+        ingredients.decimal("quantity").notNullable();
         ingredients
-          .integer('measurements_id')
+          .integer("measurements_id")
           .unsigned()
           .notNullable()
-          .references('id')
-          .inTable('measurements');
-        ingredients.string('preparation').nullable();
+          .references("id")
+          .inTable("measurements");
+        ingredients.string("preparation").nullable();
       })
       /********************************************************
        *                     MEASUREMENTS                     *
        ********************************************************/
-      .createTable('measurements', measurements => {
+      .createTable("measurements", measurements => {
         measurements.increments();
-        measurements.string('name', 255).notNullable();
+        measurements.string("name", 255).notNullable();
       })
   );
 };
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTableIfExists('measurements')
-    .dropTableIfExists('ingredients')
-    .dropTableIfExists('steps')
-    .dropTableIfExists('users')
-    .dropTableIfExists('categories')
-    .dropTableIfExists('recipes_categories')
-    .dropTableIfExists('recipes');
+    .dropTableIfExists("measurements")
+    .dropTableIfExists("ingredients")
+    .dropTableIfExists("steps")
+    .dropTableIfExists("users")
+    .dropTableIfExists("categories")
+    .dropTableIfExists("recipes_categories")
+    .dropTableIfExists("recipes");
 };

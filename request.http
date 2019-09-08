@@ -1,0 +1,177 @@
+@hostname = localhost
+@port = 5000
+@host = {{hostname}}:{{port}}
+@register = auth/register
+@login = auth/login
+
+@contentType = application/json
+
+###
+POST http://{{host}}/{{register}} HTTP/1.1
+Content-Type: {{contentType}}
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoidXNlciIsInVzZXJJRCI6MTYsImlhdCI6MTU2Nzk3MTg3NywiZXhwIjoxNTY3OTc5MDc3fQ.ekJjZ2FlFCpDx4ti6u0FTOnyjSjtl-xYzBrYTLfLsaQ
+
+{
+  "family_name": "Boose",
+  "first_name": "Jamelle",
+  "last_name": "Boosse",
+  "email": "jboose2@gmail.com",
+  "password": "catdog123"
+}
+
+###
+
+POST http://{{host}}/{{login}} HTTP/1.1
+Content-Type: {{contentType}}
+# Authorization: bearer {{token}}
+
+{
+  "email": "jboose2@gmail.com",
+  "password": "catdog123"
+}
+
+###
+GET http://{{host}}/users HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+
+###
+GET http://{{host}}/recipes/ HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+POST http://{{host}}/recipes HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "title": "spaghetti",
+  "created_by": 16,
+  "author": "grandma",
+  "category_id": 6
+}
+
+###
+PUT http://{{host}}/recipes/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "title": "spaghetti",
+  "created_by": 16,
+  "author": "my bitch",
+  "category_id": 6
+}
+
+###
+DELETE  http://{{host}}/recipes/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
+GET http://{{host}}/categories HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
+POST http://{{host}}/categories HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "snack"
+}
+
+###
+
+PUT http://{{host}}/categories/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "pastas"
+}
+
+###
+
+DELETE  http://{{host}}/categories/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
+GET http://{{host}}/measurements HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
+POST http://{{host}}/measurements HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "test-measurments"
+}
+
+###
+
+PUT http://{{host}}/measurements/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "put-measurements"
+}
+
+###
+
+DELETE http://{{host}}/measurements/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+@recipes_id = 1
+GET http://{{host}}/recipes/{{recipes_id}}/ingredients HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+POST http://{{host}}/recipes/{{recipes_id}}/ingredients HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "recipe_id": 1,
+  "name": "water",
+  "quantity": 10,
+  "measurements_id": 2,
+  "preparation": "measure water"
+}
+
+###
+
+PUT http://{{host}}/ingredients/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+{
+  "name": "oats and stuff",
+  "quantity": 100,
+  "measurements_id": 2,
+  "preparation": "chop chop chopppp oats"
+}
+
+###
+@id = 3
+DELETE http://{{host}}/ingredients/{{id}} HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: bearer {{token}}
+
+###
+
