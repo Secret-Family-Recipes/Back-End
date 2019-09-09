@@ -1,6 +1,7 @@
-exports.seed = function(knex) {
+exports.seed = async function(knex) {
   try {
-    await knex.truncate('users'); 
+    await knex.truncate('measurements');
+    await knex.truncate('categories');
   } catch (err) {
     console.error(err);
   }
