@@ -17,11 +17,13 @@ function add(user) {
 function findBy(filter) {
   return db('users')
     .where(filter)
+    .select('id', 'family_name', 'first_name', 'last_name', 'email')
     .first();
 }
 
 function findById(id) {
   return db('users')
     .where({ id })
+    .select('id', 'family_name', 'first_name', 'last_name', 'email')
     .first();
 }
