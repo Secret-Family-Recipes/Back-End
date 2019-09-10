@@ -1,6 +1,7 @@
 const router = require("express").Router(),
   Recipes = require("./recipes-model"),
-  Ingredients = require("../ingredients/ingredients-model");
+  Ingredients = require("../ingredients/ingredients-model"),
+  Steps = require("../steps/steps-model");
 
 /********************************************************
  *                     GET /recipes                     *
@@ -85,16 +86,6 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.get("/:id", validateID, async (req, res) => {
-  const { id } = req.params;
-  try {
-    const recipe = await Recipes.findById(id);
-    res.json(recipe);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to get recipe." });
-  }
-});
-
 /********************************************************
  *        GET /recipes/:recipe_id/ingredients           *
  ********************************************************/
@@ -122,6 +113,36 @@ router.post("/:recipe_id/ingredients", async (req, res) => {
     res.status(200).json(ingredient);
   } catch (err) {
     res.status(500).json({ message: "Failed to create new ingredients" });
+  }
+});
+
+/********************************************************
+ *        GET /recipes/:recipe_id/steps           *
+ ********************************************************/
+router.get("/:recipe_id/steps", async (req, res) => {
+  const { recipe_id } = req.params;
+  try {
+    const steps = await Steps.getSteps(recipe_id);
+    res.status(200).json(steps);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+});
+
+/********************************************************
+ *        POST /recipes/:recipe_id/steps                *
+ ********************************************************/
+router.post("/:recipe_id/steps", async (req, res) => {
+  const body = req.body;
+  const recipe_id = req.params.recipe_id;
+  const id = { recipe_id: recipe_id };
+  const stepsData = Object.assign(body, id);
+
+  try {
+    const steps = await Steps.addSteps(stepsData);
+    res.status(200).json(steps);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to create new steps" });
   }
 });
 
