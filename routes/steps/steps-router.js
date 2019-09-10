@@ -1,8 +1,8 @@
 const router = require("express").Router(),
-  Ingredients = require("./ingredients-model");
+  Steps = require("./steps-model");
 
 /********************************************************
- *        PUT /ingredients/:id                          *
+ *                     PUT /steps/:id                   *
  ********************************************************/
 router.put("/:id", validateID, async (req, res) => {
   const { id } = req.params;
@@ -14,7 +14,7 @@ router.put("/:id", validateID, async (req, res) => {
       });
     }
 
-    const updated = await Ingredients.update(changes, id);
+    const updated = await Steps.update(changes, id);
     res.status(200).json(updated);
   } catch (error) {
     res.status(500).json(error.message);
@@ -22,20 +22,18 @@ router.put("/:id", validateID, async (req, res) => {
 });
 
 /********************************************************
- *              DELETE /ingredients/:id                 *
+ *              DELETE /steps/:id                 *
  ********************************************************/
 router.delete("/:id", validateID, async (req, res) => {
   const { id } = req.params;
-  const { ingredient } = req;
+  const { step } = req;
 
   try {
-    const deleted = await Ingredients.remove(id);
+    const deleted = await Steps.remove(id);
     if (deleted) {
-      res.status(200).json({ removed: deleted, ingredient });
+      res.status(200).json({ removed: deleted, step });
     } else {
-      res
-        .status(404)
-        .json({ message: "Could not find ingredient with given id." });
+      res.status(404).json({ message: "Could not find step with given id." });
     }
   } catch (error) {
     res.status(500).json(error.message);
@@ -45,14 +43,14 @@ router.delete("/:id", validateID, async (req, res) => {
 async function validateID(req, res, next) {
   const { id } = req.params;
 
-  let ingredient = await Ingredients.findById(id);
+  let step = await Steps.findById(id);
 
-  if (ingredient) {
-    req.ingredient = ingredient;
+  if (step) {
+    req.step = step;
     next();
   } else {
     res.status(400).json({
-      message: `An ingredient with id ${id} could not be found.`
+      message: `An step with id ${id} could not be found.`
     });
   }
 }

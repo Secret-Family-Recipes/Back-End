@@ -26,6 +26,7 @@ const recipesRouter = require("../routes/recipes/recipes-router");
 const categoriesRouter = require("../routes/categories/categories-router");
 const measurementsRouter = require("../routes/measurements/measurements-router");
 const ingredientsRouter = require("../routes/ingredients/ingredients-router");
+const stepsRouter = require("../routes/steps/steps-router");
 
 server.use("/auth", authRouter);
 server.use("/recipes", authorize, recipesRouter);
@@ -33,6 +34,7 @@ server.use("/users", authorize, usersRouter);
 server.use("/categories", authorize, categoriesRouter);
 server.use("/measurements", authorize, measurementsRouter);
 server.use("/ingredients", authorize, ingredientsRouter);
+server.use("/steps", authorize, stepsRouter);
 
 /********************************************************
  *                   CUSTOM MIDDLEWARE                  *
