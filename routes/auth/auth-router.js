@@ -36,7 +36,7 @@ router.post('/login', validateRequest, async (req, res) => {
   try {
     const user = await Users.findBy({ email });
 
-    if (bcrypt.compareSync(password, user.password)) {
+    if (user && bcrypt.compareSync(password, user.password)) {
       res.status(200).json({
         message: 'Login successful',
         token: generateToken(user),
@@ -104,7 +104,7 @@ function generateToken(user) {
   };
 
   const options = {
-    expiresIn: '2h'
+    expiresIn: '6h'
   };
 
   return jwt.sign(
