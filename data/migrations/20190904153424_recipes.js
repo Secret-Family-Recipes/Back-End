@@ -76,8 +76,7 @@ exports.up = function(knex) {
           .unsigned()
           .notNullable()
           .references('id')
-          .inTable('recipes')
-          .unique();
+          .inTable('recipes');
         steps.string('description', 255).notNullable();
       })
       /********************************************************
@@ -97,8 +96,7 @@ exports.up = function(knex) {
           .unsigned()
           .notNullable()
           .references('id')
-          .inTable('recipes')
-          .unique();
+          .inTable('recipes');
         ingredients
           .string('name', 255)
           .notNullable()
