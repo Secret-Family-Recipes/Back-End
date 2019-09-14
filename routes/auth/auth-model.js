@@ -8,9 +8,9 @@ module.exports = {
 
 function add(user) {
   return db('users')
+    .returning('id')
     .insert(user)
     .then(async ([id]) => {
-      console.log(id);
       return await findById(id);
     });
 }
