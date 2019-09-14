@@ -21,7 +21,7 @@ function findById(id) {
 
 function getSteps(recipe_id) {
   return db
-    .select('steps.recipe_id', 'steps.description')
+    .select('steps.id', 'steps.recipe_id', 'steps.description')
     .from('steps')
     .join('recipes', 'recipes.id', 'steps.recipe_id')
     .where('steps.recipe_id', recipe_id);
@@ -30,9 +30,10 @@ function getSteps(recipe_id) {
 function addSteps(stepsData) {
   return (
     db('steps')
+      .returning('id')
       .insert(stepsData)
-      .then(async _ => {
-        return await findById(stepsData.id);
+      .then(async ([id]) => {
+        return await findById(id);
       })
       // TODO remove if everything is working
       // TODO "insert into `steps` (`description`, `recipe_id`) values ('get sauce', '2') - SQLITE_CONSTRAINT: UNIQUE constraint failed: steps.recipe_id"
