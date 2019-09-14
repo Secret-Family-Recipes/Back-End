@@ -17,6 +17,16 @@ exports.up = function(knex) {
         users.string('password', 255).notNullable();
       })
       /********************************************************
+       *                      CATEGORIES                      *
+       ********************************************************/
+      .createTable('categories', categories => {
+        categories.increments();
+        categories
+          .string('name', 255)
+          .notNullable()
+          .unique();
+      })
+      /********************************************************
        *                       RECIPES                        *
        ********************************************************/
       .createTable('recipes', recipes => {
@@ -35,16 +45,6 @@ exports.up = function(knex) {
           .references('id')
           .inTable('categories');
         recipes.string('author', 255).notNullable();
-      })
-      /********************************************************
-       *                      CATEGORIES                      *
-       ********************************************************/
-      .createTable('categories', categories => {
-        categories.increments();
-        categories
-          .string('name', 255)
-          .notNullable()
-          .unique();
       })
       /********************************************************
        *                   RECIPES_CATEGORIES                 *
@@ -121,7 +121,7 @@ exports.down = function(knex) {
     .dropTableIfExists('measurements')
     .dropTableIfExists('steps')
     .dropTableIfExists('recipes_categories')
+    .dropTableIfExists('recipes')
     .dropTableIfExists('categories')
-    .dropTableIfExists('users')
-    .dropTableIfExists('recipes');
+    .dropTableIfExists('users');
 };
