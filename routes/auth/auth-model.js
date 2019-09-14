@@ -10,6 +10,7 @@ function add(user) {
   return db('users')
     .insert(user)
     .then(async ([id]) => {
+      console.log(id);
       return await findById(id);
     });
 }
