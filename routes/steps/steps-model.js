@@ -45,8 +45,12 @@ function addSteps(stepsData) {
 
 async function update(changes, id) {
   return db('steps')
+    .returning('id')
     .where({ id })
-    .update(changes);
+    .update(changes)
+    .then(async ([id]) => {
+      return await findById(id);
+    });
 }
 
 function remove(id) {
