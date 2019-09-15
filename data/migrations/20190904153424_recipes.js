@@ -105,7 +105,6 @@ exports.up = function(knex) {
         ingredients
           .integer('measurements_id')
           .unsigned()
-          .notNullable()
           .references('id')
           .inTable('measurements');
         ingredients.string('preparation').nullable();
