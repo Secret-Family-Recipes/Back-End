@@ -4,10 +4,11 @@
   "description": "API for the Secret Family Recipes Application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env DB_ENV=testing jest --watch",
     "start": "node index.js",
     "server": "nodemon index.js",
-    "reseth": "npx heroku run knex migrate:rollback -a ls-secret-family-recipes-stage && npx heroku run knex migrate:latest -a ls-secret-family-recipes-stage && npx heroku run knex seed:run -a ls-secret-family-recipes-stage"
+    "reset-h-stage": "npx heroku run knex migrate:rollback -a ls-secret-family-recipes-stage && npx heroku run knex migrate:latest -a ls-secret-family-recipes-stage && npx heroku run knex seed:run -a ls-secret-family-recipes-stage",
+    "reset-h": "npx heroku run knex migrate:rollback -a ls-secret-family-recipes && npx heroku run knex migrate:latest -a ls-secret-family-recipes && npx heroku run knex seed:run -a ls-secret-family-recipes"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,10 @@
     "sqlite3": "^4.1.0"
   },
   "devDependencies": {
+    "cross-env": "^5.2.1",
     "eslint": "^6.3.0",
-    "nodemon": "^1.19.2"
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.2",
+    "supertest": "^4.0.2"
   }
 }
