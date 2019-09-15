@@ -58,18 +58,13 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const measurement = await Measurements.findById(id);
-    if (measurement) {
+    const category = await Categories.findById(id);
+    if (category) {
       await Categories.remove(id);
-
-      res.json({
+      res.status(200).json({
         message: 'Category was removed',
-        measurement
+        category
       });
-    }
-
-    if (deleted) {
-      res.json({ removed: deleted });
     } else {
       res
         .status(404)
