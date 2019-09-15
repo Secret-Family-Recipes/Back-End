@@ -1,4 +1,4 @@
-const db = require("../../data/db-config");
+const db = require('../../data/db-config');
 
 module.exports = {
   find,
@@ -9,11 +9,12 @@ module.exports = {
 };
 
 function find() {
-  return db("categories");
+  return db('categories');
 }
 
 async function add(category) {
-  return db("categories")
+  return db('categories')
+    .returning('id')
     .insert(category)
     .then(async ([id]) => {
       return await findById(id);
@@ -21,19 +22,23 @@ async function add(category) {
 }
 
 function findById(id) {
-  return db("categories")
+  return db('categories')
     .where({ id })
     .first();
 }
 
 function update(name, id) {
-  return db("categories")
+  return db('categories')
+    .returning('id')
     .where({ id })
-    .update(name);
+    .update(name)
+    .then(async ([id]) => {
+      return await findById(id);
+    });
 }
 
 function remove(id) {
-  return db("categories")
+  return db('categories')
     .where({ id })
     .del();
 }
