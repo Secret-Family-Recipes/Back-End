@@ -1,10 +1,10 @@
-const router = require("express").Router(),
-  Measurements = require("./measurements-model");
+const router = require('express').Router(),
+  Measurements = require('./measurements-model');
 
 /********************************************************
  *                   GET /Measurements                    *
  ********************************************************/
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   // TEST ENDPOINT
   try {
     const c = await Measurements.find();
@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 /********************************************************
  *                    POST /Measurements                   *
  ********************************************************/
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   const measurementData = req.body;
   try {
     const measurement = await Measurements.add(measurementData);
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 /********************************************************
  *                 PUT Measurements/id                    *
  ********************************************************/
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const name = req.body;
 
@@ -44,31 +44,35 @@ router.put("/:id", async (req, res) => {
     } else {
       res
         .status(404)
-        .json({ message: "Could not find measurement name with given id." });
+        .json({ message: 'Could not find measurement name with given id.' });
     }
   } catch (err) {
-    res.status(500).json({ message: "Failed to update measurement." });
+    res.status(500).json({ message: 'Failed to update measurement.' });
   }
 });
 
 /********************************************************
  *              DELETE /Measurements/id                   *
  ********************************************************/
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
-
   try {
-    const deleted = await Measurements.remove(id);
+    const measurement = await Measurements.findById(id);
 
-    if (deleted) {
-      res.json({ removed: deleted });
+    if (measurement) {
+      await Measurements.remove(id);
+
+      res.status(200).json({
+        message: 'Measurement removed.',
+        measurement
+      });
     } else {
       res
         .status(404)
-        .json({ message: "Could not find measurement with given id" });
+        .json({ message: 'Could not find measurement with given id' });
     }
   } catch (err) {
-    res.status(500).json({ message: "Failed to delete measurement" });
+    res.status(500).json({ message: 'Failed to delete measurement' });
   }
 });
 

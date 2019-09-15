@@ -1,10 +1,10 @@
-const router = require("express").Router(),
-  Categories = require("./categories-model");
+const router = require('express').Router(),
+  Categories = require('./categories-model');
 
 /********************************************************
  *                   GET /categories                    *
  ********************************************************/
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   // TEST ENDPOINT
   try {
     const c = await Categories.find();
@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
 /********************************************************
  *                    POST /categories                   *
  ********************************************************/
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   const categoryData = req.body;
   try {
     const category = await Categories.add(categoryData);
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
 /********************************************************
  *                 PUT categories/id                    *
  ********************************************************/
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const name = req.body;
 
@@ -44,31 +44,39 @@ router.put("/:id", async (req, res) => {
     } else {
       res
         .status(404)
-        .json({ message: "Could not find category name with given id." });
+        .json({ message: 'Could not find category name with given id.' });
     }
   } catch (err) {
-    res.status(500).json({ message: "Failed to update category." });
+    res.status(500).json({ message: 'Failed to update category.' });
   }
 });
 
 /********************************************************
  *              DELETE /categories/id                   *
  ********************************************************/
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deleted = await Categories.remove(id);
+    const measurement = await Measurements.findById(id);
+    if (measurement) {
+      await Categories.remove(id);
+
+      res.json({
+        message: 'Category was removed',
+        measurement
+      });
+    }
 
     if (deleted) {
       res.json({ removed: deleted });
     } else {
       res
         .status(404)
-        .json({ message: "Could not find category with given id" });
+        .json({ message: 'Could not find category with given id' });
     }
   } catch (err) {
-    res.status(500).json({ message: "Failed to delete category" });
+    res.status(500).json({ message: 'Failed to delete category' });
   }
 });
 
