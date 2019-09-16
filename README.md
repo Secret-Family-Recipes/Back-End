@@ -12,7 +12,7 @@ https://dbdesigner.page.link/tx7R
 
 ---
 
-## Routes
+## **Routes**
 
 #### Register
 
@@ -45,12 +45,16 @@ https://dbdesigner.page.link/tx7R
 
 #### Recipes
 
-| Method | Endpoint       | Description                                                                                                                        |
-| ------ | -------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/recipes/:id` | Returns a recipe specified by the recipe id.                                                                                       |
-| POST   | `/recipes`     | Adds a new recipe to database and returns the newly created recipe back. </br>~</br>Requires from `title`, `created_by`, `author`. |
-| PUT    | `/recipes/:id` | Updates a recipe specified by the recipe id. </br>~</br>Requires `title`, `created_by`, `author`.                                  |
-| DELETE | `/recipes/:id` | Deletes a recipe specified by the recipe id                                                                                        |
+| Method | Endpoint                          | Description                                                                                                                        |
+| ------ | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/recipes/:id`                    | Returns a recipe specified by the recipe id.                                                                                       |
+| GET    | `/recipes/:recipe_id/ingredients` | Returns an array of objects representing all ingredients referenced by the recipe_id                                               |
+| GET    | `/recipes/:recipe_id/steps`       | Returns an array of objects representing all steps referenced by the recipe id                                                     |
+| POST   | `/recipes`                        | Adds a new recipe to database and returns the newly created recipe back. </br>~</br>Requires from `title`, `created_by`, `author`. |
+| POST   | `/recipes/:recipe_id/steps`       | Adds a new step to the recipe.</br>~</br>Requires `recipe_id`, `description`                                                       |
+| POST   | `/recipes/:recipe_id/ingredients` | Adds a new ingredient to the database.</br>~</br>Requires `recipe_id`, `name`, `quantity`, `measurement_id`, `preparation`         |
+| PUT    | `/recipes/:id`                    | Updates a recipe specified by the recipe id. </br>~</br>Requires `title`, `created_by`, `author`.                                  |
+| DELETE | `/recipes/:id`                    | Deletes a recipe specified by the recipe id                                                                                        |
 
 </br>
 
@@ -58,23 +62,19 @@ https://dbdesigner.page.link/tx7R
 
 ---
 
-| Method | Endpoint                              | Description                                                                                                                                          |
-| ------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/recipes/:recipe_id/ingredients`     | Returns an array of objects representing all ingredients referenced by the recipe_id                                                                 |
-| POST   | `/recipes/:recipe_id/ingredients`     | Adds a new ingredient to the database.</br>~</br>Requires `recipe_id`, `name`, `quantity`, `measurement_id`, `preparation`                           |
-| PUT    | `/recipes/:recipe_id/ingredients/:id` | Updates an ingredient specified by the recipe and ingredient id.</br>~</br>Requires `recipe_id`, `name`, `quantity`, `measurement_id`, `preparation` |
-| DELETE | `/recipes/:recipe_id/ingredients/:id` | Deletes an ingredient specified by the recipe id                                                                                                     |
+| Method | Endpoint           | Description                                                                                                                                          |
+| ------ | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PUT    | `/ingredients/:id` | Updates an ingredient specified by the recipe and ingredient id.</br>~</br>Requires `recipe_id`, `name`, `quantity`, `measurement_id`, `preparation` |
+| DELETE | `/ingredients/:id` | Deletes an ingredient specified by the recipe id                                                                                                     |
 
 </br>
 
 #### Steps
 
-| Method | Endpoint                        | Description                                                                                       |
-| ------ | ------------------------------- | ------------------------------------------------------------------------------------------------- |
-| GET    | `/recipes/:recipe_id/steps`     | Returns an array of objects representing all steps referenced by the recipe id                    |
-| POST   | `/recipes/:recipe_id/steps`     | Adds a new step to the recipe.</br>~</br>Requires `recipe_id`, `description`                      |
-| PUT    | `/recipes/:recipe_id/steps/:id` | Updates a step specified by the recipe and step id.</br>~</br>Requires `recipe_id`, `description` |
-| DELETE | `/recipes/recipe_id/steps/:id`  | Deletes a step specified by the recipe and step id.                                               |
+| Method | Endpoint     | Description                                                                                       |
+| ------ | ------------ | ------------------------------------------------------------------------------------------------- |
+| PUT    | `/steps/:id` | Updates a step specified by the recipe and step id.</br>~</br>Requires `recipe_id`, `description` |
+| DELETE | `/steps/:id` | Deletes a step specified by the recipe and step id.                                               |
 
 </br>
 
